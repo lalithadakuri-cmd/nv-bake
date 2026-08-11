@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "NV Bake | Premium Biscuits & Cookies",
+    title: "NV Bake | Premium Biscuits",
     description:
       "Premium biscuits & cookies, baked with love. Turns into your favorite in the very first bite. We bet!",
     images: [
