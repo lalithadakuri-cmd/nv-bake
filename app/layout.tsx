@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NV Bake | Premium Biscuits & Cookies",
+  title: "NV Bake | Premium Biscuits",
   description:
     "NV Bake — Premium butter biscuits and cookies, baked with love. Discover our delicious collection and order directly on WhatsApp.",
 };
