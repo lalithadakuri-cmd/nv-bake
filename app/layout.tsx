@@ -16,7 +16,24 @@ export const metadata: Metadata = {
   title: "NV Bake | Premium Biscuits",
   description:
     "NV Bake — Premium butter biscuits and cookies, baked with love. Discover our delicious collection and order directly on WhatsApp.",
-};
+  icons: {
+    icon: "/images/Logo.png",
+  },
+
+  openGraph: {
+    title: "NV Bake | Premium Biscuits & Cookies",
+    description:
+      "Premium biscuits & cookies, baked with love. Turns into your favorite in the very first bite. We bet!",
+    images: [
+      {
+        url: "/images/Logo.png",
+        width: 1200,
+        height: 1200,
+        alt: "NV Bake - Premium Biscuits & Cookies",
+      },
+    ],
+  },
+  };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
