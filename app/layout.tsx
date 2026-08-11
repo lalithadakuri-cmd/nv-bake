@@ -26,10 +26,10 @@ export const metadata: Metadata = {
       "Premium biscuits & cookies, baked with love. Turns into your favorite in the very first bite. We bet!",
     images: [
       {
-        url: "/images/Logo.png",
+        url: "/images/og-image.png",
         width: 1200,
-        height: 1200,
-        alt: "NV Bake - Premium Biscuits & Cookies",
+        height: 630,
+        alt: "NV Bake - Premium Biscuits",
       },
     ],
   },
