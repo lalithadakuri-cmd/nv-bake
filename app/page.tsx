@@ -70,13 +70,11 @@ export default function Home() {
               Pricing
             </a>
 
-            <a href="#story" className="transition hover:text-[#B7652E]">
-              Our Story
-            </a>
+            <a href="#our-story">Our Story</a>
 
-            <a href="#why" className="transition hover:text-[#B7652E]">
-              Why NV Bake
-            </a>
+            <a href="#why-nv-bake">
+				Why NV Bake
+			</a>
 
             <a href="#feedback" className="transition hover:text-[#B7652E]">
               Feedback
@@ -212,7 +210,7 @@ export default function Home() {
 
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div id="pricing" className="grid gap-6 md:grid-cols-3">
 
             {products.map((product) => (
 
@@ -306,126 +304,127 @@ export default function Home() {
       </section>
 
       {/* WHY NV BAKE */}
-      <section id="why" className="bg-[#F3E6D4]">
+      <section id="why-nv-bake" className="section">
+		  <div className="section-heading">
+			<p className="eyebrow">Why NV Bake</p>
+			<h2>Good ingredients.<br />Better biscuits.</h2>
+			<p className="section-intro">
+			  What goes into your bite matters. We choose our ingredients
+			  carefully because great taste starts with great ingredients.
+			</p>
+		  </div>
 
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+		  <div className="why-grid">
 
-          <div className="mx-auto max-w-3xl text-center">
+			  <div className="why-card why-card-1">
+				<span className="why-symbol">✦</span>
+				<h3>Amul Butter</h3>
+				<p>
+				  Rich, creamy butter for that unmistakable buttery taste and
+				  melt-in-your-mouth texture.
+				</p>
+			  </div>
 
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#B7652E]">
-              Why NV Bake
-            </p>
+			  <div className="why-card why-card-2">
+				<span className="why-symbol">♡</span>
+				<h3>Khandsari Sugar</h3>
+				<p>
+				  Khandsari sugar adds a delicate warmth and depth of sweetness,
+				  perfectly complementing the rich buttery flavour.
+				</p>
+			  </div>
 
-            <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] text-[#3B2417] sm:text-5xl">
-              Good ingredients.
-              <br />
-              <span className="text-[#B7652E]">
-                Great first bites.
-              </span>
-            </h2>
+			  <div className="why-card why-card-3">
+				<span className="why-symbol">✿</span>
+				<h3>Premium Vanilla</h3>
+				<p>
+				  Premium vanilla extract adds a naturally rich and beautiful
+				  vanilla flavour to every biscuit.
+				</p>
+			  </div>
 
-          </div>
+			  <div className="why-card why-card-4">
+				<span className="why-symbol">✦</span>
+				<h3>No Vanaspati</h3>
+				<p>
+				  Made with butter at the heart of the recipe, without vanaspati
+				  or Dalda.
+				</p>
+			  </div>
 
-          <div className="mt-14 grid gap-5 sm:grid-cols-3">
+			  <div className="why-card why-card-5">
+				<span className="why-symbol">♡</span>
+				<h3>No Preservatives</h3>
+				<p>
+				  Thoughtfully baked in small batches, without any preservatives —
+				  keeping every batch as fresh and delightful as it should be.
+				</p>
+			  </div>
 
-            {[
-              ["01", "Premium", "Quality ingredients chosen."],
-              ["02", "Freshly Baked", "Baked with freshness."],
-              ["03", "Baked with Love", "Every batch gets personal attention."],
-            ].map(([number, title, text]) => (
+			  <div className="why-card why-card-6">
+				<span className="why-symbol">✿</span>
+				<h3>Small-Batch Baking</h3>
+				<p>
+				  Every batch gets personal attention, from mixing the dough to
+				  baking each biscuit to that perfect bite.
+				</p>
+			  </div>
 
-              <div
-                key={number}
-                className="rounded-[1.5rem] bg-white p-7 shadow-sm"
-              >
+			</div>
 
-                <div className="text-xs font-black tracking-[0.2em] text-[#D3934C]">
-                  {number}
-                </div>
-
-                <h3 className="mt-6 text-xl font-extrabold text-[#3B2417]">
-                  {title}
-                </h3>
-
-                <p className="mt-2 text-sm leading-6 text-[#735B49]">
-                  {text}
-                </p>
-
-              </div>
-
-            ))}
-
-          </div>
-
-        </div>
-
-      </section>
+		  <div className="why-highlight">
+			<h3>What goes into your bite matters.</h3>
+			<p>
+			  No shortcuts. No compromising on ingredients. Just carefully chosen
+			  ingredients, freshly baked.
+			</p>
+		  </div>
+		</section>
 
       {/* OUR STORY */}
-      <section id="story">
+      <section id="our-story" className="section story-section">
+		  <div className="story-content">
+			<p className="eyebrow">Our Story</p>
 
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:px-10 lg:py-28">
+			<h2>It started with<br />my son.</h2>
 
-          <div>
+			<p>
+			  My son has always been fond of biscuits.
+			</p>
 
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#B7652E]">
-              Our Story
-            </p>
+			<p>
+			  Out of his love for biscuits, I started wondering if I could make
+			  something at home that was genuinely delicious, while also using
+			  ingredients I was happy to give my family.
+			</p>
 
-            <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] text-[#3B2417] sm:text-5xl">
-              It started with
-              <br />
-              <span className="text-[#B7652E]">
-                one good bite.
-              </span>
-            </h2>
+			<p>
+			  So, I started experimenting.
+			</p>
 
-            <p className="mt-6 max-w-lg text-base leading-7 text-[#735B49]">
-              NV Bake is built around an exceptional idea — premium
-              ingredients, quality baking and treats that make you want just
-              one more.
-            </p>
+			<p>
+			  Recipe after recipe, batch after batch, I kept tweaking the
+			  ingredients, proportions and baking process until I finally created
+			  a biscuit that we absolutely loved.
+			</p>
 
-            <p className="mt-4 max-w-lg text-base leading-7 text-[#735B49]">
-              We are baking with love and building a collection of favourites
-              one bite at a time.
-            </p>
+			<p>
+			  That little experiment became <strong>NV Bake</strong>.
+			</p>
 
-            <div className="mt-7 rounded-2xl border border-[#E3C9A5] bg-[#FFF7EA] p-5">
+			<p>
+			  What started with baking for my son has now grown into a passion
+			  for making premium, small-batch biscuits with carefully chosen
+			  ingredients — biscuits that we are proud to serve to our own family
+			  and yours.
+			</p>
 
-              <p className="text-sm font-extrabold leading-7 text-[#5C3926]">
-                No Palm Oil.
-                <br />
-                No Dalda.
-                <br />
-                No harmful preservatives.
-              </p>
-
-            </div>
-
-          </div>
-
-          <div className="relative mx-auto w-full max-w-lg">
-
-            <div className="absolute -inset-5 rounded-[3rem] bg-[#E8B96F]/25 blur-3xl" />
-
-            <div className="relative overflow-hidden rounded-[2.5rem] border-[6px] border-white bg-white shadow-xl">
-
-              <Image
-                src="/images/Sample.jpeg"
-                alt="NV Bake packaging"
-                width={900}
-                height={1200}
-                className="h-auto w-full object-cover"
-              />
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
+			<div className="story-highlight">
+			  <strong>Made with ingredients we believe in.</strong>
+			  <span>No shortcuts. Just good biscuits.</span>
+			</div>
+		  </div>
+		</section>
 
       {/* FEEDBACK */}
       <section id="feedback" className="bg-[#3B2417]">

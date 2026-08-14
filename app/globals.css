@@ -38,3 +38,322 @@ body {
 .animate-marquee {
   animation: marquee 12s linear infinite;
 }
+
+/* =========================
+   WHY NV BAKE
+   ========================= */
+
+#why-nv-bake {
+  padding: 90px 8%;
+  background: #fff8ee;
+}
+
+#why-nv-bake .section-heading {
+  max-width: 760px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+#why-nv-bake .eyebrow,
+#our-story .eyebrow {
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #b86127;
+}
+
+#why-nv-bake h2,
+#our-story h2 {
+  margin: 0 0 18px;
+  font-family: Georgia, serif;
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 1.08;
+  color: #3b261b;
+}
+
+#why-nv-bake .section-intro {
+  max-width: 650px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #6b574b;
+}
+
+.why-grid {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.why-card {
+  padding: 30px 28px;
+  background: #ffffff;
+  border: 1px solid #eadbca;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(74, 45, 27, 0.05);
+}
+
+.why-number {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #b86127;
+}
+
+.why-card h3 {
+  margin: 0 0 10px;
+  font-family: Georgia, serif;
+  font-size: 23px;
+  color: #3b261b;
+}
+
+.why-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #6b574b;
+}
+
+.why-highlight {
+  max-width: 850px;
+  margin: 55px auto 0;
+  padding: 32px 35px;
+  text-align: center;
+  background: #f3e5d4;
+  border-radius: 20px;
+}
+
+.why-highlight h3 {
+  margin: 0 0 10px;
+  font-family: Georgia, serif;
+  font-size: 28px;
+  color: #3b261b;
+}
+
+.why-highlight p {
+  margin: 0;
+  color: #6b574b;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   OUR STORY
+   ========================= */
+
+#our-story {
+  padding: 100px 8%;
+  background: #ffffff;
+}
+
+.story-content {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.story-content p:not(.eyebrow) {
+  max-width: 720px;
+  margin: 0 auto 18px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #6b574b;
+}
+
+.story-content strong {
+  color: #3b261b;
+}
+
+.story-highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 600px;
+  margin: 45px auto 0;
+  padding: 28px;
+  background: #fff8ee;
+  border: 1px solid #eadbca;
+  border-radius: 18px;
+}
+
+.story-highlight strong {
+  font-family: Georgia, serif;
+  font-size: 24px;
+}
+
+.story-highlight span {
+  color: #6b574b;
+}
+
+
+ /* =========================
+    WHY NV BAKE — AESTHETIC CARDS
+    ========================= */
+
+.why-grid {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.why-card {
+  position: relative;
+  min-height: 220px;
+  padding: 34px 30px;
+  background: #fffdf9;
+  border: 1px solid #eadbca;
+  border-radius: 24px;
+  text-align: center;
+  overflow: hidden;
+
+  box-shadow: 0 8px 24px rgba(74, 45, 27, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Soft decorative circle */
+
+.why-card::before {
+  content: "";
+  position: absolute;
+  width: 105px;
+  height: 105px;
+  top: -42px;
+  right: -42px;
+  border-radius: 50%;
+  background: #f5e6d4;
+  opacity: 0.65;
+}
+
+/* Tiny decorative dot */
+
+.why-card::after {
+  content: "·";
+  position: absolute;
+  bottom: 10px;
+  left: 18px;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  color: #d8b99a;
+}
+
+/* Individual playful rotations */
+
+.why-card-1 {
+  transform: rotate(-0.8deg);
+}
+
+.why-card-2 {
+  transform: rotate(0.7deg);
+}
+
+.why-card-3 {
+  transform: rotate(-0.5deg);
+}
+
+.why-card-4 {
+  transform: rotate(0.8deg);
+}
+
+.why-card-5 {
+  transform: rotate(-0.7deg);
+}
+
+.why-card-6 {
+  transform: rotate(0.5deg);
+}
+
+/* Hover */
+
+.why-card:hover {
+  transform: translateY(-7px) rotate(0deg);
+  box-shadow: 0 16px 36px rgba(74, 45, 27, 0.11);
+}
+
+/* Decorative symbol */
+
+.why-symbol {
+  position: relative;
+  display: block;
+  margin-bottom: 18px;
+
+  font-family: Georgia, serif;
+  font-size: 25px;
+  line-height: 1;
+
+  color: #b86127;
+}
+
+/* Card heading */
+
+.why-card h3 {
+  position: relative;
+  margin: 0 0 12px;
+
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.2;
+
+  color: #3b261b;
+}
+
+/* Card description */
+
+.why-card p {
+  position: relative;
+
+  max-width: 285px;
+  margin: 0 auto;
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  color: #6b574b;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 900px) {
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .why-card {
+    min-height: auto;
+    padding: 30px 25px;
+  }
+
+  .why-card-1,
+  .why-card-2,
+  .why-card-3,
+  .why-card-4,
+  .why-card-5,
+  .why-card-6 {
+    transform: rotate(0deg);
+  }
+
+  .why-card:hover {
+    transform: translateY(-5px);
+  }
+}
