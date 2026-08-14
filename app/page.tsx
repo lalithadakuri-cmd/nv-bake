@@ -75,6 +75,65 @@ export default function Home() {
             <a href="#why-nv-bake">
 				Why NV Bake
 			</a>
+			
+			<a
+			  href="https://www.instagram.com/nvbake.in/"
+			  target="_blank"
+			  rel="noopener noreferrer"
+			  aria-label="NV Bake on Instagram"
+			>
+			  <svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  aria-hidden="true"
+>
+  <defs>
+    <linearGradient id="instagram-gradient-header" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#F58529" />
+      <stop offset="30%" stopColor="#DD2A7B" />
+      <stop offset="65%" stopColor="#8134AF" />
+      <stop offset="100%" stopColor="#515BD4" />
+    </linearGradient>
+  </defs>
+
+  <rect
+    x="2"
+    y="2"
+    width="20"
+    height="20"
+    rx="5"
+    fill="url(#instagram-gradient-header)"
+  />
+
+  <rect
+    x="6"
+    y="6"
+    width="12"
+    height="12"
+    rx="3.5"
+    fill="none"
+    stroke="white"
+    strokeWidth="1.8"
+  />
+
+  <circle
+    cx="12"
+    cy="12"
+    r="3"
+    fill="none"
+    stroke="white"
+    strokeWidth="1.8"
+  />
+
+  <circle
+    cx="17"
+    cy="7"
+    r="1"
+    fill="white"
+  />
+</svg>
+			</a>
 
             <a href="#feedback" className="transition hover:text-[#B7652E]">
               Feedback
@@ -150,6 +209,74 @@ export default function Home() {
               >
                 Pre-Order on WhatsApp
               </a>
+			  
+			  <a
+href="https://www.instagram.com/nvbake.in/"
+target="_blank"
+rel="noopener noreferrer"
+className="instagram-hero-link"
+aria-label="Follow NV Bake on Instagram"
+
+>
+
+<svg
+  width="28"
+  height="28"
+  viewBox="0 0 24 24"
+  aria-hidden="true"
+>
+  <defs>
+    <linearGradient id="instagram-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#F58529" />
+      <stop offset="30%" stopColor="#DD2A7B" />
+      <stop offset="65%" stopColor="#8134AF" />
+      <stop offset="100%" stopColor="#515BD4" />
+    </linearGradient>
+  </defs>
+
+  <rect
+    x="2"
+    y="2"
+    width="20"
+    height="20"
+    rx="5"
+    fill="url(#instagram-gradient)"
+  />
+
+  <rect
+    x="6"
+    y="6"
+    width="12"
+    height="12"
+    rx="3.5"
+    fill="none"
+    stroke="white"
+    strokeWidth="1.8"
+  />
+
+  <circle
+    cx="12"
+    cy="12"
+    r="3"
+    fill="none"
+    stroke="white"
+    strokeWidth="1.8"
+  />
+
+  <circle
+    cx="17"
+    cy="7"
+    r="1"
+    fill="white"
+  />
+</svg>
+
+  <span>
+    <small>Follow along</small>
+    @nvbake.in
+  </span>
+</a>
+
 
             </div>
 
@@ -474,6 +601,30 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-3 text-sm text-[#735B49] sm:items-end">
+			
+			  <a
+		  	    href="https://www.instagram.com/nvbake.in/"
+			    target="_blank"
+			    rel="noopener noreferrer"
+			    className="instagram-link"
+			  >
+			    <svg
+				  width="18"
+				  height="18"
+				  viewBox="0 0 24 24"
+				  fill="none"
+				  stroke="currentColor"
+				  strokeWidth="1.8"
+				  strokeLinecap="round"
+				  strokeLinejoin="round"
+			    >
+				<rect x="3" y="3" width="18" height="18" rx="5" />
+				<circle cx="12" cy="12" r="4" />
+				<circle cx="17.5" cy="6.5" r="0.7" fill="currentColor" stroke="none" />
+			    </svg>
+
+			    <span>@nvbake.in</span>
+			  </a>
 
               <a
                 href={orderLink()}

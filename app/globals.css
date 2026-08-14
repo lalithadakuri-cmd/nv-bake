@@ -357,3 +357,50 @@ body {
     transform: translateY(-5px);
   }
 }
+
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.instagram-link:hover {
+  opacity: 0.7;
+}
+
+.instagram-hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 12px;
+
+  color: #6b3f27;
+  text-decoration: none;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.instagram-hero-link span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.instagram-hero-link small {
+  margin-bottom: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  opacity: 0.7;
+}
+
+.instagram-hero-link:hover {
+  transform: translateY(-2px);
+  opacity: 0.75;
+}
