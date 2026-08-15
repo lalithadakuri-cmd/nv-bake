@@ -463,10 +463,9 @@ aria-label="Follow NV Bake on Instagram"
 
 			  <div className="why-card why-card-3">
 				<span className="why-symbol">✿</span>
-				<h3>Premium Vanilla</h3>
+				<h3>Premium Patisserie Duo</h3>
 				<p>
-				  Premium vanilla extract adds a naturally rich and beautiful
-				  vanilla flavour to every biscuit.
+				  Cloud-milled patisserie finesse meets pure vanilla warmth for the ultimate luxury bake.
 				</p>
 			  </div>
 
