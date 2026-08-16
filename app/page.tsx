@@ -172,13 +172,15 @@ export default function Home() {
 
             <div className="flex items-stretch gap-5 sm:gap-7">
 
-  <div className="relative w-36 shrink-0 self-stretch sm:h-36 sm:w-44">
+<div className="flex items-stretch gap-5 sm:gap-7">
+
+  <div className="relative w-36 shrink-0 sm:w-44">
     <Image
       src="/images/sample1.png"
       alt="NV Bake"
       fill
       priority
-      className="object-cover object-center"
+      className="object-fill"
     />
   </div>
 
