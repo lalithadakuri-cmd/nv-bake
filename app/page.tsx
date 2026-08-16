@@ -170,23 +170,23 @@ export default function Home() {
           {/* LOGO + TAGLINE */}
           <div className="order-2 lg:order-1">
 
-            <div className="flex items-center gap-5 sm:gap-7">
+            <div className="flex items-stretch gap-5 sm:gap-7">
 
-              <div className="relative h-28 w-36 shrink-0 sm:h-36 sm:w-44">
-                <Image
-                  src="/images/sample1.png"
-                  alt="NV Bake"
-                  fill
-                  priority
-                  className="object-contain object-left"
-                />
-              </div>
+  <div className="relative h-28 w-36 shrink-0 self-stretch sm:h-36 sm:w-44">
+    <Image
+      src="/images/sample1.png"
+      alt="NV Bake"
+      fill
+      priority
+      className="object-cover object-center"
+    />
+  </div>
 
-              <h1 className="text-3xl font-black leading-[1.08] tracking-[-0.035em] text-[#B7652E] sm:text-4xl lg:text-5xl">
-                Turns into your favorite in the very first bite. We bet!
-              </h1>
+  <h1 className="text-3xl font-black leading-[1.08] tracking-[-0.035em] text-[#B7652E] sm:text-4xl lg:text-5xl">
+    Turns into your favorite in the very first bite. We bet!
+  </h1>
 
-            </div>
+</div>
 
             <p className="mt-8 max-w-md text-base font-medium leading-7 text-[#B7652E] sm:text-xl">
               Indulge in our Premium Butter, Almond, and Choco cookies, baked with love just for you...
