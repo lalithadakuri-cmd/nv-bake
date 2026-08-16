@@ -24,7 +24,7 @@ const products = [
     sizes: ["50g", "80g", "100g"],
     regular: ["₹139", "₹189", "₹229"],
     sale: ["₹119", "₹169", "₹199"],
-    image: "/images/Choco.png",
+    image: "/images/Chocolaty.jpg",
     badge: "ALL TIME FAVORITE",
   },
 ];
