@@ -170,8 +170,6 @@ export default function Home() {
           {/* LOGO + TAGLINE */}
           <div className="order-2 lg:order-1">
 
-            <div className="flex items-stretch gap-5 sm:gap-7">
-
 <div className="flex items-stretch gap-5 sm:gap-7">
 
   <div className="relative w-36 shrink-0 sm:w-44">
