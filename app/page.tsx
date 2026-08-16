@@ -174,7 +174,7 @@ export default function Home() {
 
               <div className="relative h-28 w-36 shrink-0 sm:h-36 sm:w-44">
                 <Image
-                  src="/images/Logo.png"
+                  src="/images/sample1.png"
                   alt="NV Bake"
                   fill
                   priority
