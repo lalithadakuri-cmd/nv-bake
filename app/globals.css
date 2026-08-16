@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,700;1,6..96,700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -403,4 +404,41 @@ body {
 .instagram-hero-link:hover {
   transform: translateY(-2px);
   opacity: 0.75;
+}
+
+.twinkle-star {
+  display: inline-block;
+  color: #C43D68;
+  animation: starTwinkle 1.4s ease-in-out infinite;
+}
+
+.twinkle-star:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.twinkle-star:nth-child(2) {
+  animation-delay: 0.45s;
+}
+
+.twinkle-star:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+.font-bodoni {
+  font-family: "Bodoni Moda", "Bodoni", serif;
+  font-weight: 700;
+  font-style: italic;
 }

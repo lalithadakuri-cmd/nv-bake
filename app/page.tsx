@@ -402,10 +402,19 @@ aria-label="Follow NV Bake on Instagram"
                     </div>
 					
 					<div className="mt-4 overflow-hidden whitespace-nowrap">
-						<div className="inline-block animate-marquee text-[10px] font-black uppercase tracking-[0.18em] text-[#B7652E]">
-							★ Freedom Sale Pricing &nbsp;&nbsp;&nbsp; ★ Freedom Sale Pricing &nbsp;&nbsp;&nbsp; ★ Freedom Sale Pricing
-						</div>
-					</div>
+  <div className="inline-block animate-marquee font-bodoni text-[15px] font-bold italic tracking-[0.08em] text-[#3B1F4A]">
+
+    <span className="twinkle-star">★</span>
+    &nbsp;&nbsp;Festive Indulgence Edition&nbsp;&nbsp;&nbsp;
+
+    <span className="twinkle-star">★</span>
+    &nbsp;&nbsp;Festive Indulgence Edition&nbsp;&nbsp;&nbsp;
+
+    <span className="twinkle-star">★</span>
+    &nbsp;&nbsp;Festive Indulgence Edition&nbsp;&nbsp;&nbsp;
+
+  </div>
+</div>
 
                   </div>
 
