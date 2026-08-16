@@ -8,7 +8,7 @@ const products = [
     sizes: ["50g", "80g", "100g"],
     regular: ["₹99", "₹149", "₹189"],
     sale: ["₹79", "₹129", "₹159"],
-    image: "/images/Butter Biscuits1.png",
+    image: "/images/BB.png",
     badge: "SIGNATURE",
   },
   {
