@@ -521,38 +521,38 @@ aria-label="Follow NV Bake on Instagram"
 		  <div className="story-content">
 			<p className="eyebrow">Our Story</p>
 
-			<h2>It started with<br />my son.</h2>
+			<h2>It started with<br />my sons.</h2>
 
-			<p>
-			  My son has always been fond of biscuits.
-			</p>
+<p>
+  My sons have always been fond of biscuits.
+</p>
 
-			<p>
-			  Out of his love for biscuits, I started wondering if I could make
-			  something at home that was genuinely delicious, while also using
-			  ingredients I was happy to give my family.
-			</p>
+<p>
+  Out of their love for biscuits, I started wondering if I could make
+  something at home that was genuinely delicious, while also using
+  ingredients I was happy to give my family.
+</p>
 
-			<p>
-			  So, I started experimenting.
-			</p>
+<p>
+  So, I started experimenting.
+</p>
 
-			<p>
-			  Recipe after recipe, batch after batch, I kept tweaking the
-			  ingredients, proportions and baking process until I finally created
-			  a biscuit that we absolutely loved.
-			</p>
+<p>
+  Recipe after recipe, batch after batch, I kept tweaking the
+  ingredients, proportions and baking process until I finally created
+  a biscuit that we absolutely loved.
+</p>
 
-			<p>
-			  That little experiment became <strong>NV Bake</strong>.
-			</p>
+<p>
+  That little experiment became <strong>NV Bake</strong>.
+</p>
 
-			<p>
-			  What started with baking for my son has now grown into a passion
-			  for making premium, small-batch biscuits with carefully chosen
-			  ingredients — biscuits that we are proud to serve to our own family
-			  and yours.
-			</p>
+<p>
+  What started with baking for my sons has now grown into a passion
+  for making premium, small-batch biscuits with carefully chosen
+  ingredients — biscuits that I am proud to serve to my own family
+  and yours.
+</p>
 
 			<div className="story-highlight">
 			  <strong>Made with ingredients we believe in.</strong>
