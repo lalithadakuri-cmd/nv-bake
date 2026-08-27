@@ -1,6 +1,17 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 const whatsappNumber = "916281379611";
+
+type CartItem = {
+  key: string;
+  productName: string;
+  size: string;
+  unitPrice: number;
+  quantity: number;
+};
 
 const products = [
   {
@@ -38,18 +49,95 @@ function orderLink(product?: string) {
 }
 
 export default function Home() {
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cartNotice, setCartNotice] = useState("");
+
+  const formatPrice = (amount: number) => `₹${amount.toLocaleString("en-IN")}`;
+
+  const addToCart = (productName: string, size: string, price: string) => {
+  const unitPrice = Number(price.replace(/[^\d]/g, ""));
+  const key = `${productName}-${size}`;
+
+  setCart((currentCart) => {
+    const existingItem = currentCart.find((item) => item.key === key);
+
+    if (existingItem) {
+      return currentCart.map((item) =>
+        item.key === key
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+    }
+
+    return [
+      ...currentCart,
+      { key, productName, size, unitPrice, quantity: 1 },
+    ];
+  });
+
+  setCartNotice("Item added!");
+
+  window.setTimeout(() => {
+    setCartNotice("");
+  }, 2200);
+};
+
+  const changeQuantity = (key: string, change: number) => {
+    setCart((currentCart) =>
+      currentCart
+        .map((item) =>
+          item.key === key
+            ? { ...item, quantity: item.quantity + change }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  const total = cart.reduce(
+    (sum, item) => sum + item.unitPrice * item.quantity,
+    0
+  );
+
+  const itemCount = cart.reduce(
+    (count, item) => count + item.quantity,
+    0
+  );
+
+  const orderCartOnWhatsApp = () => {
+    if (cart.length === 0) return;
+
+    const orderItems = cart
+      .map(
+        (item) =>
+          `• ${item.productName} — ${item.size} × ${item.quantity} — ${formatPrice(
+            item.unitPrice * item.quantity
+          )}`
+      )
+      .join("\n");
+
+    const message = `Hi NV Bake! I’d like to place a pre-order for:
+
+${orderItems}
+
+Total: ${formatPrice(total)}`;
+
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
   return (
     <main className="min-h-screen bg-[#FFF9F0] text-[#3B2417]">
-
-      {/* TOP STRIP */}
       <div className="bg-[#3B2417] px-4 py-2 text-center text-[10px] font-bold tracking-[0.22em] text-[#F8D9A5] sm:text-xs">
         PREMIUM • BAKED WITH LOVE • PRE-ORDER ONLY
       </div>
 
-      {/* NAVIGATION */}
       <header className="sticky top-0 z-50 border-b border-[#E9D7BE] bg-[#FFF9F0]/95 backdrop-blur">
         <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
-
           <a href="#" className="relative h-20 w-36">
             <Image
               src="/images/Logo.png"
@@ -61,7 +149,6 @@ export default function Home() {
           </a>
 
           <nav className="hidden items-center gap-9 text-sm font-semibold md:flex">
-
             <a href="#collection" className="transition hover:text-[#B7652E]">
               Collection
             </a>
@@ -72,128 +159,116 @@ export default function Home() {
 
             <a href="#our-story">Our Story</a>
 
-            <a href="#why-nv-bake">
-				Why NV Bake
-			</a>
-			
-			<a
-			  href="https://www.instagram.com/nvbake.in/"
-			  target="_blank"
-			  rel="noopener noreferrer"
-			  aria-label="NV Bake on Instagram"
-			>
-			  <svg
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  aria-hidden="true"
->
-  <defs>
-    <linearGradient id="instagram-gradient-header" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stopColor="#F58529" />
-      <stop offset="30%" stopColor="#DD2A7B" />
-      <stop offset="65%" stopColor="#8134AF" />
-      <stop offset="100%" stopColor="#515BD4" />
-    </linearGradient>
-  </defs>
+            <a href="#why-nv-bake">Why NV Bake</a>
 
-  <rect
-    x="2"
-    y="2"
-    width="20"
-    height="20"
-    rx="5"
-    fill="url(#instagram-gradient-header)"
-  />
+            <a
+              href="https://www.instagram.com/nvbake.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="NV Bake on Instagram"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                <defs>
+                  <linearGradient
+                    id="instagram-gradient-header"
+                    x1="0%"
+                    y1="100%"
+                    x2="100%"
+                    y2="0%"
+                  >
+                    <stop offset="0%" stopColor="#F58529" />
+                    <stop offset="30%" stopColor="#DD2A7B" />
+                    <stop offset="65%" stopColor="#8134AF" />
+                    <stop offset="100%" stopColor="#515BD4" />
+                  </linearGradient>
+                </defs>
 
-  <rect
-    x="6"
-    y="6"
-    width="12"
-    height="12"
-    rx="3.5"
-    fill="none"
-    stroke="white"
-    strokeWidth="1.8"
-  />
-
-  <circle
-    cx="12"
-    cy="12"
-    r="3"
-    fill="none"
-    stroke="white"
-    strokeWidth="1.8"
-  />
-
-  <circle
-    cx="17"
-    cy="7"
-    r="1"
-    fill="white"
-  />
-</svg>
-			</a>
+                <rect
+                  x="2"
+                  y="2"
+                  width="20"
+                  height="20"
+                  rx="5"
+                  fill="url(#instagram-gradient-header)"
+                />
+                <rect
+                  x="6"
+                  y="6"
+                  width="12"
+                  height="12"
+                  rx="3.5"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="1.8"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="3"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="1.8"
+                />
+                <circle cx="17" cy="7" r="1" fill="white" />
+              </svg>
+            </a>
 
             <a href="#feedback" className="transition hover:text-[#B7652E]">
               Feedback
             </a>
 
-            <a
-              href={orderLink()}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full bg-[#B7652E] px-6 py-3 font-bold text-white shadow-sm transition hover:bg-[#934A20]"
-            >
-              Pre-Order
-            </a>
+            <div className="relative">
+  <button
+    type="button"
+    onClick={() => setIsCartOpen(true)}
+    className="rounded-full bg-[#B7652E] px-6 py-3 font-bold text-white shadow-sm transition hover:bg-[#934A20]"
+  >
+    Cart ({itemCount})
+  </button>
 
+  {cartNotice && (
+    <span className="absolute left-full top-1/2 z-50 ml-3 -translate-y-1/2 whitespace-nowrap rounded-full bg-[#3B2417] px-3 py-1.5 text-xs font-bold text-white shadow-lg">
+      ✓ {cartNotice}
+    </span>
+  )}
+</div>
           </nav>
 
-          <a
-            href={orderLink()}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => setIsCartOpen(true)}
             className="rounded-full bg-[#B7652E] px-5 py-2.5 text-sm font-bold text-white md:hidden"
           >
-            Pre-Order
-          </a>
-
+            Cart ({itemCount})
+          </button>
         </div>
       </header>
 
-      {/* HERO */}
       <section className="overflow-hidden">
-
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:py-24">
-
-          {/* LOGO + TAGLINE */}
           <div className="order-2 lg:order-1">
+            <div className="flex items-stretch gap-5 sm:gap-7">
+              <div className="relative w-36 shrink-0 sm:w-44">
+                <Image
+                  src="/images/sample1.png"
+                  alt="NV Bake"
+                  fill
+                  priority
+                  className="object-fill"
+                />
+              </div>
 
-<div className="flex items-stretch gap-5 sm:gap-7">
-
-  <div className="relative w-36 shrink-0 sm:w-44">
-    <Image
-      src="/images/sample1.png"
-      alt="NV Bake"
-      fill
-      priority
-      className="object-fill"
-    />
-  </div>
-
-  <h1 className="text-3xl font-black leading-[1.08] tracking-[-0.035em] text-[#B7652E] sm:text-4xl lg:text-5xl">
-    Turns into your favorite in the very first bite. We bet!
-  </h1>
-
-</div>
+              <h1 className="text-3xl font-black leading-[1.08] tracking-[-0.035em] text-[#B7652E] sm:text-4xl lg:text-5xl">
+                Turns into your favorite in the very first bite. We bet!
+              </h1>
+            </div>
 
             <p className="mt-8 max-w-md text-base font-medium leading-7 text-[#B7652E] sm:text-xl">
-              Indulge in our Premium Butter, Almond, and Choco cookies, baked with love just for you...
+              Indulge in our Premium Butter, Almond, and Choco cookies, baked
+              with love just for you...
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-
               <a
                 href="#collection"
                 className="rounded-full bg-[#3B2417] px-7 py-4 text-center text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#28170F]"
@@ -201,98 +276,80 @@ export default function Home() {
                 Explore Collection
               </a>
 
+              <button
+  type="button"
+  onClick={() => setIsCartOpen(true)}
+  className="rounded-full border-2 border-[#B7652E] px-7 py-4 text-center text-sm font-bold text-[#934A20] transition hover:-translate-y-0.5 hover:bg-[#F6E5D0]"
+>
+  View Cart ({itemCount})
+</button>
+
               <a
-                href={orderLink()}
+                href="https://www.instagram.com/nvbake.in/"
                 target="_blank"
-                rel="noreferrer"
-                className="rounded-full border-2 border-[#B7652E] px-7 py-4 text-center text-sm font-bold text-[#934A20] transition hover:-translate-y-0.5 hover:bg-[#F6E5D0]"
+                rel="noopener noreferrer"
+                className="instagram-hero-link"
+                aria-label="Follow NV Bake on Instagram"
               >
-                Pre-Order on WhatsApp
+                <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+                  <defs>
+                    <linearGradient
+                      id="instagram-gradient"
+                      x1="0%"
+                      y1="100%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stopColor="#F58529" />
+                      <stop offset="30%" stopColor="#DD2A7B" />
+                      <stop offset="65%" stopColor="#8134AF" />
+                      <stop offset="100%" stopColor="#515BD4" />
+                    </linearGradient>
+                  </defs>
+
+                  <rect
+                    x="2"
+                    y="2"
+                    width="20"
+                    height="20"
+                    rx="5"
+                    fill="url(#instagram-gradient)"
+                  />
+                  <rect
+                    x="6"
+                    y="6"
+                    width="12"
+                    height="12"
+                    rx="3.5"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="1.8"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="1.8"
+                  />
+                  <circle cx="17" cy="7" r="1" fill="white" />
+                </svg>
+
+                <span>
+                  <small>Follow along</small>
+                  @nvbake.in
+                </span>
               </a>
-			  
-			  <a
-href="https://www.instagram.com/nvbake.in/"
-target="_blank"
-rel="noopener noreferrer"
-className="instagram-hero-link"
-aria-label="Follow NV Bake on Instagram"
-
->
-
-<svg
-  width="28"
-  height="28"
-  viewBox="0 0 24 24"
-  aria-hidden="true"
->
-  <defs>
-    <linearGradient id="instagram-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stopColor="#F58529" />
-      <stop offset="30%" stopColor="#DD2A7B" />
-      <stop offset="65%" stopColor="#8134AF" />
-      <stop offset="100%" stopColor="#515BD4" />
-    </linearGradient>
-  </defs>
-
-  <rect
-    x="2"
-    y="2"
-    width="20"
-    height="20"
-    rx="5"
-    fill="url(#instagram-gradient)"
-  />
-
-  <rect
-    x="6"
-    y="6"
-    width="12"
-    height="12"
-    rx="3.5"
-    fill="none"
-    stroke="white"
-    strokeWidth="1.8"
-  />
-
-  <circle
-    cx="12"
-    cy="12"
-    r="3"
-    fill="none"
-    stroke="white"
-    strokeWidth="1.8"
-  />
-
-  <circle
-    cx="17"
-    cy="7"
-    r="1"
-    fill="white"
-  />
-</svg>
-
-  <span>
-    <small>Follow along</small>
-    @nvbake.in
-  </span>
-</a>
-
-
             </div>
-
           </div>
 
-          {/* LARGE LOGO */}
           <div className="order-1 lg:order-2">
-
             <div className="relative mx-auto max-w-[650px]">
-
               <div className="absolute -inset-8 rounded-[3rem] bg-[#E9B86E]/30 blur-3xl" />
 
               <div className="relative flex aspect-square items-center justify-center rounded-[2.5rem] border-[6px] border-white bg-[#FFF9F0] shadow-[0_25px_70px_rgba(72,43,22,0.16)]">
-
                 <div className="relative h-[75%] w-[75%]">
-
                   <Image
                     src="/images/Logo.png"
                     alt="NV Bake"
@@ -300,54 +357,35 @@ aria-label="Follow NV Bake on Instagram"
                     priority
                     className="object-contain"
                   />
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
-
       </section>
 
-      {/* COLLECTION */}
       <section id="collection" className="bg-white">
-
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
-
           <div className="mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-
             <div>
-
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#B7652E]">
                 The Collection
               </p>
 
               <h2 className="mt-3 text-4xl font-black tracking-[-0.04em] text-[#3B2417] sm:text-5xl">
                 Baked for every appetite, Pick your:{" "}
-                <span className="text-[#B7652E]">
-                  favourite.
-                </span>
+                <span className="text-[#B7652E]">favourite.</span>
               </h2>
-
             </div>
-
           </div>
 
           <div id="pricing" className="grid gap-6 md:grid-cols-3">
-
             {products.map((product) => (
-
               <article
                 key={product.name}
                 className="group overflow-hidden rounded-[2rem] border border-[#EADCC9] bg-[#FFF9F0] transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
               >
-
                 <div className="relative aspect-square overflow-hidden bg-[#F0E1CC]">
-
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -358,281 +396,307 @@ aria-label="Follow NV Bake on Instagram"
                   <div className="absolute right-4 top-4 rounded-full bg-[#3B2417] px-3 py-2 text-[11px] font-bold italic tracking-[0.15em] text-white">
                     {product.badge}
                   </div>
-
                 </div>
 
                 <div className="p-7">
-
                   <h3 className="text-2xl font-extrabold tracking-[-0.025em] text-[#3B2417]">
                     {product.name}
                   </h3>
 
                   <div className="mt-6 rounded-2xl border border-[#E3C9A5] bg-white p-4">
-
                     <div className="grid grid-cols-3 gap-2 text-center">
-
                       {product.sizes.map((size, index) => (
-
                         <div key={size}>
-
-                          <p className="text-sm font-bold text-[#735B49]">
+                          <span className="inline-flex rounded-full bg-[#F6E5D0] px-3 py-1.5 text-sm font-black text-[#1F1610] ring-1 ring-[#E3C9A5]">
                             {size}
-                          </p>
-						  
-						  <div className="relative inline-block">
-							<p className="text-sm font-semibold text-[#8B7666]">
-								{product.regular[index]}
-							</p>
+                          </span>
 
-							<span className="pointer-events-none absolute inset-0 flex items-center justify-center">
-							<span className="absolute h-[1px] w-[115%] rotate-45 bg-red-600" />
-							<span className="absolute h-[1px] w-[115%] -rotate-45 bg-red-600" />
-							</span>
-						</div>
+                          <div className="relative mx-auto mt-2 block w-fit px-1">
+                            <p className="text-base font-bold text-[#8B7666]">
+                              {product.regular[index]}
+                            </p>
 
-                          <p className="mt-1 text-sm font-black text-[#B7652E]">
+                            <span
+                              aria-hidden="true"
+                              className="pointer-events-none absolute -left-1 -right-1 top-1/2 h-[2px] -translate-y-1/2 bg-[#B7652E]"
+                            />
+                          </div>
+
+                          <span className="mt-1 inline-block rounded-full bg-[#F8E2D0] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#934A20]">
+                            Offer price
+                          </span>
+
+                          <p className="mt-1 text-base font-black text-[#B7652E]">
                             {product.sale[index]}
                             {index === 2 && " ⭐"}
                           </p>
 
+                          <button
+                            type="button"
+                            onClick={() =>
+                              addToCart(
+                                product.name,
+                                size,
+                                product.sale[index]
+                              )
+                            }
+                            className="mt-3 rounded-full bg-[#3B2417] px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[#B7652E]"
+                          >
+                            Add
+                          </button>
                         </div>
-
                       ))}
-
                     </div>
-					
-					<div className="mt-4 overflow-hidden whitespace-nowrap">
-  <div className="inline-block animate-marquee font-bodoni text-[15px] font-bold italic tracking-[0.08em] text-[#3B1F4A]">
 
-    <span className="twinkle-star">★</span>
-    &nbsp;&nbsp;Festive Indulgence Edition&nbsp;&nbsp;&nbsp;
-
-    <span className="twinkle-star">★</span>
-    &nbsp;&nbsp;Festive Indulgence Edition&nbsp;&nbsp;&nbsp;
-
-    <span className="twinkle-star">★</span>
-    &nbsp;&nbsp;Festive Indulgence Edition&nbsp;&nbsp;&nbsp;
-
-  </div>
-</div>
-
+                    <div className="mt-4 overflow-hidden whitespace-nowrap">
+                      <div className="inline-block animate-marquee font-bodoni text-[15px] font-bold italic tracking-[0.08em] text-[#3B1F4A]">
+                        <span className="twinkle-star">★</span>
+                        &nbsp;&nbsp;Festive Indulgence Edition&nbsp;&nbsp;&nbsp;
+                        <span className="twinkle-star">★</span>
+                        &nbsp;&nbsp;Festive Indulgence Edition&nbsp;&nbsp;&nbsp;
+                        <span className="twinkle-star">★</span>
+                        &nbsp;&nbsp;Festive Indulgence Edition&nbsp;&nbsp;&nbsp;
+                      </div>
+                    </div>
                   </div>
 
-                  <a
-                    href={orderLink(product.name)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-6 block rounded-full bg-[#B7652E] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#934A20]"
-                  >
-                    Order Now
-                  </a>
-
+                  <button
+  type="button"
+  onClick={() => setIsCartOpen(true)}
+  className="mt-6 block w-full rounded-full bg-[#B7652E] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#934A20]"
+>
+  View Cart (
+    {cart
+      .filter((item) => item.productName === product.name)
+      .reduce((count, item) => count + item.quantity, 0)}
+  )
+</button>
                 </div>
-
               </article>
-
             ))}
-
           </div>
-
         </div>
-
       </section>
 
-      {/* WHY NV BAKE */}
       <section id="why-nv-bake" className="section">
-		  <div className="section-heading">
-			<p className="eyebrow">Why NV Bake</p>
-			<h2>Good ingredients.<br />Better biscuits.</h2>
-			<p className="section-intro">
-			  What goes into your bite matters. We choose our ingredients
-			  carefully because great taste starts with great ingredients.
-			</p>
-		  </div>
-
-		  <div className="why-grid">
-
-			  <div className="why-card why-card-1">
-				<span className="why-symbol">✦</span>
-				<h3>Amul Butter</h3>
-				<p>
-				  Rich, creamy butter for that unmistakable buttery taste and
-				  melt-in-your-mouth texture.
-				</p>
-			  </div>
-
-			  <div className="why-card why-card-2">
-				<span className="why-symbol">♡</span>
-				<h3>Khandsari Sugar</h3>
-				<p>
-				  Khandsari sugar adds a delicate warmth and depth of sweetness,
-				  perfectly complementing the rich buttery flavour.
-				</p>
-			  </div>
-
-			  <div className="why-card why-card-3">
-				<span className="why-symbol">✿</span>
-				<h3>Premium Patisserie Duo</h3>
-				<p>
-				  Cloud-milled patisserie finesse meets pure vanilla warmth for the ultimate luxury bake.
-				</p>
-			  </div>
-
-			  <div className="why-card why-card-4">
-				<span className="why-symbol">✦</span>
-				<h3>No Vanaspati</h3>
-				<p>
-				  Made with butter at the heart of the recipe, without vanaspati
-				  or Dalda.
-				</p>
-			  </div>
-
-			  <div className="why-card why-card-5">
-				<span className="why-symbol">♡</span>
-				<h3>No Preservatives</h3>
-				<p>
-				  Thoughtfully baked in small batches, without any preservatives —
-				  keeping every batch as fresh and delightful as it should be.
-				</p>
-			  </div>
-
-			  <div className="why-card why-card-6">
-				<span className="why-symbol">✿</span>
-				<h3>Small-Batch Baking</h3>
-				<p>
-				  Every batch gets personal attention, from mixing the dough to
-				  baking each biscuit to that perfect bite.
-				</p>
-			  </div>
-
-			</div>
-
-		  <div className="why-highlight">
-			<h3>What goes into your bite matters.</h3>
-			<p>
-			  No shortcuts. No compromising on ingredients. Just carefully chosen
-			  ingredients, freshly baked.
-			</p>
-		  </div>
-		</section>
-
-      {/* OUR STORY */}
-      <section id="our-story" className="section story-section">
-		  <div className="story-content">
-			<p className="eyebrow">Our Story</p>
-
-			<h2>It started with<br />my sons.</h2>
-
-<p>
-  My sons have always been fond of biscuits.
-</p>
-
-<p>
-  Out of their love for biscuits, I started wondering if I could make
-  something at home that was genuinely delicious, while also using
-  ingredients I was happy to give my family.
-</p>
-
-<p>
-  So, I started experimenting.
-</p>
-
-<p>
-  Recipe after recipe, batch after batch, I kept tweaking the
-  ingredients, proportions and baking process until I finally created
-  a biscuit that we absolutely loved.
-</p>
-
-<p>
-  That little experiment became <strong>NV Bake</strong>.
-</p>
-
-<p>
-  What started with baking for my sons has now grown into a passion
-  for making premium, small-batch biscuits with carefully chosen
-  ingredients — biscuits that I am proud to serve to my own family
-  and yours.
-</p>
-
-			<div className="story-highlight">
-			  <strong>Made with ingredients we believe in.</strong>
-			  <span>No shortcuts. Just good biscuits.</span>
-			</div>
-		  </div>
-		</section>
-
-      {/* FEEDBACK */}
-      <section id="feedback" className="bg-[#3B2417]">
-
-        <div className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 lg:py-24">
-
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#F0C889]">
-            We want to hear from you
-          </p>
-
-          <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] text-white sm:text-5xl">
-            Had your first bite?
+        <div className="section-heading">
+          <p className="eyebrow">Why NV Bake</p>
+          <h2>
+            Good ingredients.
+            <br />
+            Better biscuits.
           </h2>
 
-          <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[#E4CEB2]">
-            Tell us what you think. Your feedback helps NV Bake become better
-            with every batch.
+          <p className="section-intro">
+            What goes into your bite matters. We choose our ingredients
+            carefully because great taste starts with great ingredients.
           </p>
-
-          <a
-            href="mailto:nvbake.in@gmail.com?subject=NV%20Bake%20Feedback"
-            className="mt-8 inline-block rounded-full bg-[#E5B86F] px-8 py-4 text-sm font-black text-[#3B2417] transition hover:bg-[#F2CF99]"
-          >
-            Share Your Feedback
-          </a>
-
         </div>
 
+        <div className="why-grid">
+          <div className="why-card why-card-1">
+            <span className="why-symbol">✦</span>
+            <h3>Amul Butter</h3>
+            <p>
+              Rich, creamy butter for that unmistakable buttery taste and
+              melt-in-your-mouth texture.
+            </p>
+          </div>
+
+          <div className="why-card why-card-2">
+            <span className="why-symbol">♡</span>
+            <h3>Khandsari Sugar</h3>
+            <p>
+              Khandsari sugar adds a delicate warmth and depth of sweetness,
+              perfectly complementing the rich buttery flavour.
+            </p>
+          </div>
+
+          <div className="why-card why-card-3">
+            <span className="why-symbol">✿</span>
+            <h3>Premium Patisserie Duo</h3>
+            <p>
+              Cloud-milled patisserie finesse meets pure vanilla warmth for
+              the ultimate luxury bake.
+            </p>
+          </div>
+
+          <div className="why-card why-card-4">
+            <span className="why-symbol">✦</span>
+            <h3>No Vanaspati</h3>
+            <p>
+              Made with butter at the heart of the recipe, without vanaspati
+              or Dalda.
+            </p>
+          </div>
+
+          <div className="why-card why-card-5">
+            <span className="why-symbol">♡</span>
+            <h3>No Preservatives</h3>
+            <p>
+              Thoughtfully baked in small batches, without any preservatives —
+              keeping every batch as fresh and delightful as it should be.
+            </p>
+          </div>
+
+          <div className="why-card why-card-6">
+            <span className="why-symbol">✿</span>
+            <h3>Small-Batch Baking</h3>
+            <p>
+              Every batch gets personal attention, from mixing the dough to
+              baking each biscuit to that perfect bite.
+            </p>
+          </div>
+        </div>
+
+        <div className="why-highlight">
+          <h3>What goes into your bite matters.</h3>
+          <p>
+            No shortcuts. No compromising on ingredients. Just carefully chosen
+            ingredients, freshly baked.
+          </p>
+        </div>
       </section>
 
-      {/* FOOTER */}
+      <section id="our-story" className="section story-section">
+        <div className="story-content">
+          <p className="eyebrow">Our Story</p>
+
+          <h2>
+            It started with
+            <br />
+            my sons.
+          </h2>
+
+          <p>My sons have always been fond of biscuits.</p>
+
+          <p>
+            Out of their love for biscuits, I started wondering if I could make
+            something at home that was genuinely delicious, while also using
+            ingredients I was happy to give my family.
+          </p>
+
+          <p>So, I started experimenting.</p>
+
+          <p>
+            Recipe after recipe, batch after batch, I kept tweaking the
+            ingredients, proportions and baking process until I finally created
+            a biscuit that we absolutely loved.
+          </p>
+
+          <p>
+            That little experiment became <strong>NV Bake</strong>.
+          </p>
+
+          <p>
+            What started with baking for my sons has now grown into a passion
+            for making premium, small-batch biscuits with carefully chosen
+            ingredients — biscuits that I am proud to serve to my own family
+            and yours.
+          </p>
+
+          <div className="story-highlight">
+            <strong>Made with ingredients we believe in.</strong>
+            <span>No shortcuts. Just good biscuits.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="feedback" className="bg-[#3B2417]">
+        <div className="mx-auto grid max-w-5xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-24">
+          <div className="text-center lg:text-left">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#F0C889]">
+              Loved your cookies?
+            </p>
+
+            <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] text-white sm:text-5xl">
+              Leave us a Google review.
+            </h2>
+
+            <p className="mt-5 max-w-xl text-sm leading-7 text-[#E4CEB2]">
+              Your review helps more cookie lovers discover NV Bake and helps
+              us continue baking better with every batch.
+            </p>
+
+            <p className="mt-5 text-sm font-bold text-[#F0C889]">
+              Scan the QR code to review NV Bake on Google.
+            </p>
+          </div>
+
+          <div className="mx-auto w-fit rounded-3xl bg-white p-5 shadow-2xl">
+            <Image
+              src="/images/google-review-qr.png"
+              alt="Scan to leave NV Bake a Google review"
+              width={260}
+              height={260}
+              className="h-auto w-52 sm:w-60"
+            />
+          </div>
+        </div>
+
+        <div className="border-t border-[#654838]">
+          <div className="mx-auto max-w-4xl px-5 py-12 text-center sm:px-8">
+            <h3 className="text-2xl font-black text-white">
+              Need help with an order?
+            </h3>
+
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-[#E4CEB2]">
+              For delivery concerns, product questions, or complaints, please
+              write to NV Bake Customer Care.
+            </p>
+
+            <a
+              href="mailto:nvbake.in@gmail.com?subject=NV%20Bake%20Customer%20Care"
+              className="mt-6 inline-block rounded-full bg-[#E5B86F] px-8 py-4 text-sm font-black text-[#3B2417] transition hover:bg-[#F2CF99]"
+            >
+              Email Customer Care
+            </a>
+          </div>
+        </div>
+      </section>
+
       <footer className="bg-[#FFF9F0]">
-
         <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
-
           <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
-
             <div className="relative h-20 w-36">
-
               <Image
                 src="/images/Logo.png"
                 alt="NV Bake"
                 fill
                 className="object-contain object-left"
               />
-
             </div>
 
             <div className="flex flex-col gap-3 text-sm text-[#735B49] sm:items-end">
-			
-			  <a
-		  	    href="https://www.instagram.com/nvbake.in/"
-			    target="_blank"
-			    rel="noopener noreferrer"
-			    className="instagram-link"
-			  >
-			    <svg
-				  width="18"
-				  height="18"
-				  viewBox="0 0 24 24"
-				  fill="none"
-				  stroke="currentColor"
-				  strokeWidth="1.8"
-				  strokeLinecap="round"
-				  strokeLinejoin="round"
-			    >
-				<rect x="3" y="3" width="18" height="18" rx="5" />
-				<circle cx="12" cy="12" r="4" />
-				<circle cx="17.5" cy="6.5" r="0.7" fill="currentColor" stroke="none" />
-			    </svg>
+              <a
+                href="https://www.instagram.com/nvbake.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="instagram-link"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle
+                    cx="17.5"
+                    cy="6.5"
+                    r="0.7"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
 
-			    <span>@nvbake.in</span>
-			  </a>
+                <span>@nvbake.in</span>
+              </a>
 
               <a
                 href={orderLink()}
@@ -649,20 +713,114 @@ aria-label="Follow NV Bake on Instagram"
               >
                 nvbake.in@gmail.com
               </a>
-
             </div>
-
           </div>
 
           <div className="mt-10 border-t border-[#EAD8BD] pt-6 text-xs text-[#9B8069]">
             © {new Date().getFullYear()} NV Bake. All rights reserved.
           </div>
-
         </div>
-
       </footer>
 
-      {/* FLOATING WHATSAPP */}
+      {isCartOpen && (
+        <div
+  className="fixed inset-0 z-[60] bg-black/40 p-4 sm:p-6"
+  onClick={() => setIsCartOpen(false)}
+>
+  <div
+    className="ml-auto flex h-full max-w-md flex-col rounded-3xl bg-[#FFF9F0] p-6 shadow-2xl"
+    onClick={(event) => event.stopPropagation()}
+  >
+            <div className="flex items-center justify-between border-b border-[#E3C9A5] pb-4">
+              <h2 className="text-2xl font-black text-[#3B2417]">
+                Your Cart
+              </h2>
+
+              <button
+                type="button"
+                onClick={() => setIsCartOpen(false)}
+                className="text-2xl font-bold text-[#735B49] hover:text-[#B7652E]"
+                aria-label="Close cart"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto py-5">
+              {cart.length === 0 ? (
+                <p className="text-center text-sm text-[#735B49]">
+                  Your cart is empty. Add your favourite cookies to begin.
+                </p>
+              ) : (
+                <div className="space-y-4">
+                  {cart.map((item) => (
+                    <div
+                      key={item.key}
+                      className="rounded-2xl border border-[#E3C9A5] bg-white p-4"
+                    >
+                      <p className="font-extrabold text-[#3B2417]">
+                        {item.productName}
+                      </p>
+
+                      <p className="mt-1 text-sm text-[#735B49]">
+                        {item.size} · {formatPrice(item.unitPrice)} each
+                      </p>
+
+                      <div className="mt-3 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => changeQuantity(item.key, -1)}
+                            className="h-8 w-8 rounded-full bg-[#F6E5D0] font-black text-[#3B2417]"
+                          >
+                            −
+                          </button>
+
+                          <span className="font-bold text-[#3B2417]">
+                            {item.quantity}
+                          </span>
+
+                          <button
+                            type="button"
+                            onClick={() => changeQuantity(item.key, 1)}
+                            className="h-8 w-8 rounded-full bg-[#F6E5D0] font-black text-[#3B2417]"
+                          >
+                            +
+                          </button>
+                        </div>
+
+                        <p className="font-black text-[#B7652E]">
+                          {formatPrice(item.unitPrice * item.quantity)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="border-t border-[#E3C9A5] pt-5">
+              <div className="mb-4 flex items-center justify-between text-lg">
+                <span className="font-bold text-[#3B2417]">Total</span>
+
+                <span className="font-black text-[#B7652E]">
+                  {formatPrice(total)}
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={orderCartOnWhatsApp}
+                disabled={cart.length === 0}
+                className="w-full rounded-full bg-[#25D366] px-5 py-4 text-sm font-black text-white transition hover:bg-[#1FAF54] disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Send Order via WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <a
         href={orderLink()}
         target="_blank"
@@ -679,7 +837,6 @@ aria-label="Follow NV Bake on Instagram"
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982 1-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.437-9.884 9.89-9.884 2.64 0 5.122 1.029 6.988 2.898a9.825 9.825 0 012.893 6.994c-.002 5.45-4.437 9.884-9.889 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.158 11.89c0 2.096.547 4.142 1.588 5.946L.057 24l6.304-1.654a11.882 11.882 0 005.684 1.447h.005c6.554 0 11.89-5.335 11.892-11.89a11.85 11.85 0 00-3.478-8.415" />
         </svg>
       </a>
-
     </main>
   );
 }
