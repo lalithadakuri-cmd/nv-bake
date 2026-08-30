@@ -50,12 +50,31 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+  // 🟢 Create a clean schema object declaring your correct social handle
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Home Baker", 
+    "name": "NV Bake",
+    "url": "https://nv-bake.vercel.app",
+    "sameAs": [
+      "https://www.instagram.com/nvbake.in/" 
+    ]
+  };
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Injecting the structured JSON-LD data into the header */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }
+
