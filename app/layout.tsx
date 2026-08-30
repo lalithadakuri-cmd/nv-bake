@@ -16,14 +16,24 @@ export const metadata: Metadata = {
   title: "NV Bake | Premium Biscuits",
   description:
     "NV Bake — Premium butter biscuits and cookies, baked with love. Discover our delicious collection and order directly on WhatsApp.",
+  
+  // 🟢 Tells Next.js how to build the absolute URLs for your share images
+  metadataBase: new URL("https://vercel.app"),
+  
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/images/Logo.png",
   },
-
   openGraph: {
     title: "NV Bake | Premium Biscuits",
     description:
       "Premium biscuits & cookies, baked with love. Turns into your favorite in the very first bite. We bet!",
+    url: "https://vercel.app",
+    siteName: "NV Bake",
+    locale: "en_US",
+    type: "website",
     images: [
       {
         url: "/images/og-image.png",
@@ -33,9 +43,13 @@ export const metadata: Metadata = {
       },
     ],
   },
-  };
+};
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
