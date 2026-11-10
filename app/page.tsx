@@ -15,26 +15,26 @@ type CartItem = {
 
 const products = [
   {
-    name: "Plain Butter",
-    sizes: ["50g", "80g", "100g"],
-    regular: ["₹99", "₹149", "₹189"],
-    sale: ["₹79", "₹129", "₹159"],
+    name: "Butter",
+    sizes: ["30g", "50g", "80g", "100g"],
+    regular: ["₹69", "₹99", "₹149", "₹189"],
+    sale: ["₹49", "₹79", "₹129", "₹159"],
     image: "/images/BB.png",
     badge: "SIGNATURE",
   },
   {
     name: "Almond",
-    sizes: ["50g", "80g", "100g"],
-    regular: ["₹119", "₹169", "₹209"],
-    sale: ["₹99", "₹149", "₹179"],
+    sizes: ["30g", "50g", "80g", "100g"],
+    regular: ["₹69", "₹119", "₹169", "₹209"],
+    sale: ["₹59", "₹99", "₹149", "₹179"],
     image: "/images/Almond.png",
     badge: "POWER-PACKED",
   },
   {
     name: "Choco",
-    sizes: ["50g", "80g", "100g"],
-    regular: ["₹139", "₹189", "₹229"],
-    sale: ["₹119", "₹169", "₹199"],
+    sizes: ["30g", "50g", "80g", "100g"],
+    regular: ["₹79", "₹139", "₹189", "₹229"],
+    sale: ["₹69", "₹119", "₹169", "₹199"],
     image: "/images/Chocolaty.jpg",
     badge: "ALL TIME FAVORITE",
   },
@@ -404,49 +404,36 @@ Total: ${formatPrice(total)}`;
                   </h3>
 
                   <div className="mt-6 rounded-2xl border border-[#E3C9A5] bg-white p-4">
-                    <div className="grid grid-cols-3 gap-2 text-center">
-                      {product.sizes.map((size, index) => (
-                        <div key={size}>
-                          <span className="inline-flex rounded-full bg-[#F6E5D0] px-3 py-1.5 text-sm font-black text-[#1F1610] ring-1 ring-[#E3C9A5]">
-                            {size}
-                          </span>
+                    <div className="flex flex-col gap-3">
+  {product.sizes.map((size, index) => (
+    <div
+      key={size}
+      className="flex items-center justify-between gap-3 border-b border-[#F3E3D2] pb-2 last:border-0"
+    >
+      <span className="inline-flex rounded-full bg-[#F6E5D0] px-4 py-1.5 text-sm font-bold text-[#3B2417]">
+        {size}
+      </span>
 
-                          <div className="relative mx-auto mt-2 block w-fit px-1">
-                            <p className="text-base font-bold text-[#8B7666]">
-                              {product.regular[index]}
-                            </p>
+      <span className="font-bold text-[#B7652E]">
+        {product.sale[index]}
+      </span>
 
-                            <span
-                              aria-hidden="true"
-                              className="pointer-events-none absolute -left-1 -right-1 top-1/2 h-[2px] -translate-y-1/2 bg-[#B7652E]"
-                            />
-                          </div>
-
-                          <span className="mt-1 inline-block rounded-full bg-[#F8E2D0] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#934A20]">
-                            Offer price
-                          </span>
-
-                          <p className="mt-1 text-base font-black text-[#B7652E]">
-                            {product.sale[index]}
-                            {index === 2 && " ⭐"}
-                          </p>
-
-                          <button
-                            type="button"
-                            onClick={() =>
-                              addToCart(
-                                product.name,
-                                size,
-                                product.sale[index]
-                              )
-                            }
-                            className="mt-3 rounded-full bg-[#3B2417] px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[#B7652E]"
-                          >
-                            Add
-                          </button>
-                        </div>
-                      ))}
-                    </div>
+      <button
+        type="button"
+        onClick={() =>
+          addToCart(
+            product.name,
+            size,
+            product.sale[index]
+          )
+        }
+        className="rounded-full bg-[#3B2417] px-5 py-1.5 text-xs font-bold text-white transition hover:bg-[#B7652E]"
+      >
+        Add
+      </button>
+    </div>
+  ))}
+</div>
 
                     <div className="mt-4 overflow-hidden whitespace-nowrap">
                       <div className="inline-block animate-marquee font-bodoni text-[15px] font-bold italic tracking-[0.08em] text-[#3B1F4A]">
@@ -460,21 +447,21 @@ Total: ${formatPrice(total)}`;
                     </div>
                   </div>
 
-                  <button
-  type="button"
-  onClick={() => setIsCartOpen(true)}
-  className="mt-6 block w-full rounded-full bg-[#B7652E] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#934A20]"
->
-  View Cart (
-    {cart
-      .filter((item) => item.productName === product.name)
-      .reduce((count, item) => count + item.quantity, 0)}
-  )
-</button>
                 </div>
               </article>
             ))}
           </div>
+
+<div className="mt-8 flex justify-center">
+  <button
+    type="button"
+    onClick={() => setIsCartOpen(true)}
+    className="w-full max-w-md rounded-full bg-[#B7652E] px-5 py-4 text-center text-base font-bold text-white transition hover:bg-[#934A22]"
+  >
+    View Cart ({cart.reduce((count, item) => count + item.quantity, 0)})
+  </button>
+</div>
+
         </div>
       </section>
 
